@@ -1,16 +1,16 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        int curPos = 1;
-        int count = 1;
+        int curPos = 0;
         int start = 0;
         while(curPos < chars.size()) {
-            while((curPos < chars.size()) && (chars[curPos - 1] == chars[curPos])) {
+            int count = 1;
+            while((curPos < (chars.size() - 1)) && (chars[curPos] == chars[curPos + 1])) {
                 count++;
                 curPos++;
             }
 
-            chars[start++] = chars[curPos - 1];
+            chars[start++] = chars[curPos];
             if (count > 1) {
                 string value = to_string(count);
                 for (int i = 0; i < value.length(); i++) {
@@ -18,7 +18,6 @@ public:
                 }
             }
             curPos++;
-            count = 1;
         }
         return start;
     }
